@@ -54,6 +54,29 @@ AREAS = [
     'Bergen'
 ]
 
+CO2 = "CO2"
+CO = "CO"
+NOX = "NOx"
+NO = "NO"
+NO2 = "NO2"
+OZONE = "O3"
+PM1 = "PM1"
+PM10 = "PM10"
+PM25 = "PM2.5"
+SO2 = "SO2"
+
+MEASURABLE_COMPONENTS = [
+    CO,
+    NO,
+    NOX,
+    NO2,
+    OZONE,
+    PM1,
+    PM10,
+    PM25,
+    SO2
+]
+
 LOCATION_URL_FORMAT = 'https://api.nilu.no/aq/utd/{0}/{1}/20?method=within'
 STATION_URL_FORMAT = 'https://api.nilu.no/aq/utd?stations={0}'
 AREA_URL_FORMAT = 'https://api.nilu.no/aq/utd?areas={0}'
@@ -104,6 +127,8 @@ class StationDto:
         self._station_id = None
         self._station_name = None
         self._area = None
+        self._latitude = None
+        self._longitude = None
         if data:
             self.update(data)
 
@@ -122,6 +147,16 @@ class StationDto:
         """Area which the station is place within."""
         return self._area
 
+    @property
+    def latitude(self) -> float:
+        """Latitude the station is positioned at."""
+        return self._latitude
+
+    @property
+    def longitude(self) -> float:
+        """Longitude the station is positioned at."""
+        return self._longitude
+
     def reset(self) -> None:
         """Reset cached data."""
         self.sensors = {}
@@ -131,6 +166,8 @@ class StationDto:
         self._station_id = data['eoi']
         self._station_name = data['station']
         self._area = data['area']
+        self._latitude = data['latitude']
+        self._longitude = data['longitude']
         comp = data['component']
         if comp not in self.sensors:
             self.sensors[comp] = SensorDto(data)

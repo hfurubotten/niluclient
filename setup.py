@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="niluclient",
-    version="0.1.0",
+    version="0.1.2",
     author="Heine Furubotten",
     description="An API client for getting pollution data "
                 "from NILU sensor stations in Norway.",

@@ -33,7 +33,7 @@ stations = client.station_data
 
 # all stations NO2 readings
 for station in stations:
-    no2_value = station.sensors['NO2'].value
+    no2_value = station.sensors[nilu.NO2].value
 
 ```
 
@@ -42,13 +42,13 @@ Finding readings from a specified station, and update cached value:
 import niluclient as nilu
 
 client = nilu.create_station_client('Kannik')
-no2_value = client.data.sensors['NO2'].value
-no2_unit = client.data.sensors['NO2'].value
+no2_value = client.data.sensors[nilu.NO2].value
+no2_unit = client.data.sensors[nilu.NO2].unit_of_measurement
 
-# after an hour. Data from the api will only update on the hour. 
+# after an hour. (Data from the api will only update on the hour) 
 client.update()
 
-new_no2_value = client.data.sensors['NO2'].value
+new_no2_value = client.data.sensors[nilu.NO2].value
 
 ````
 
@@ -75,9 +75,9 @@ Calculates day average for a given time period.
 
 **Lookup api:**
 Lists metadata used for filtering.
-- [ ] GET /lookup/areas (Partially with the `niluclient.AREAS` constants)
+- [ ] GET /lookup/areas - (Partially with the `niluclient.AREAS` constants)
 - [x] GET /lookup/stations - `niluclient.lookup_stations_in_area('')`
-- [ ] GET /lookup/components
+- [ ] GET /lookup/components - (Partially with the `niluclient.MEASURABLE_COMPONENTS` constants)
 - [ ] GET /lookup/aqis
  
 Source: endpoints and description fetched from [nilu api documentation][api-nilu-no]
