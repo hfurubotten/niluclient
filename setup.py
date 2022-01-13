@@ -9,6 +9,9 @@ setuptools.setup(
     author="Heine Furubotten",
     description="An API client for getting pollution data "
                 "from NILU sensor stations in Norway.",
+    install_requires=[
+        "requests",
+    ],
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/hfurubotten/niluclient",
